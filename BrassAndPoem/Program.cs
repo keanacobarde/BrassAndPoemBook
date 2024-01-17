@@ -73,7 +73,7 @@ void DisplayMenu()
                 DeleteProduct(products, productTypes);
                 break;
             case "3":
-                Console.WriteLine("Goodbye");
+                AddProduct(products, productTypes);
                 break;
             case "4":
                 Console.WriteLine("Goodbye");
@@ -120,7 +120,28 @@ void DeleteProduct(List<Product> products, List<ProductType> productTypes)
 
 void AddProduct(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    // OBTAINING USER INPUT
+    Console.WriteLine("Please supply the product name");
+    string prodName = Console.ReadLine();
+    Console.WriteLine("Please supply the asking price of the product");
+    decimal prodAskingPrice = Decimal.Parse(Console.ReadLine());
+    Console.WriteLine("Please supply the product type ID. 1 for Brass. 2 for Poem.");
+    int prodType = Int32.Parse(Console.ReadLine());
+
+    // Taking user input and appending it to new instance of proj
+    try
+    {
+        Product ProdToAdd = new Product();
+        ProdToAdd.Name = prodName;
+        ProdToAdd.Price = prodAskingPrice;
+        ProdToAdd.ProductTypeId = prodType;
+        // Adding user created prod
+        products.Add(ProdToAdd);
+    }
+    catch
+    {
+        Console.WriteLine("Please pick a valid date!");
+    }
 }
 
 void UpdateProduct(List<Product> products, List<ProductType> productTypes)
