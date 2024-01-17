@@ -67,10 +67,10 @@ void DisplayMenu()
         switch (choice)
         {
             case "1":
-                Console.WriteLine("Goodbye");
+                DisplayAllProducts(products, productTypes);
                 break;
             case "2":
-                Console.WriteLine("Goodbye");
+                DeleteProduct(products, productTypes);
                 break;
             case "3":
                 Console.WriteLine("Goodbye");
@@ -90,12 +90,32 @@ void DisplayMenu()
 
 void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    for (int i = 0; i < products.Count; i++)
+    {
+        Console.WriteLine($"{i + 1} - {products[i].Name} is for sale and costs {products[i].Price}. It is of the {productTypes.Where(pt => pt.ID == products[i].ProductTypeId).ToList()[0].Title} variety");
+    }
 }
 
 void DeleteProduct(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    string choice = null;
+
+    while (choice != "0")
+    {
+        try
+        {
+            // loop through products but create a ReadLine
+            Console.WriteLine("0. Goodbye");
+            DisplayAllProducts(products, productTypes);
+            choice = Console.ReadLine();
+            products.RemoveAt(Int32.Parse(choice) - 1);
+        }
+        catch
+        {
+            break;
+        }
+
+    }
 }
 
 void AddProduct(List<Product> products, List<ProductType> productTypes)
@@ -108,6 +128,8 @@ void UpdateProduct(List<Product> products, List<ProductType> productTypes)
     throw new NotImplementedException();
 }
 
+Greeting();
+DisplayMenu();
 
 // don't move or change this!
 public partial class Program { }
