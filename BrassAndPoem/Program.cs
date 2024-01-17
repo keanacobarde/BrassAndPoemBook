@@ -44,12 +44,48 @@ List<ProductType> productTypes = new List<ProductType>()
 };
 
 //put your greeting here
+void Greeting()
+{
+    Console.WriteLine("Welcome to Brass and Poems!");
+}
 
 //implement your loop here
 
 void DisplayMenu()
 {
-    throw new NotImplementedException();
+    string choice = null;
+    while (choice != "5")
+    {
+        Console.WriteLine(@"Choose an option: 
+                      1. Display All Products
+                      2. Delete a product
+                      3. Add a new product
+                      4. Update product properties
+                      5. Exit");
+        choice = Console.ReadLine();
+
+        switch (choice)
+        {
+            case "1":
+                Console.WriteLine("Goodbye");
+                break;
+            case "2":
+                Console.WriteLine("Goodbye");
+                break;
+            case "3":
+                Console.WriteLine("Goodbye");
+                break;
+            case "4":
+                Console.WriteLine("Goodbye");
+                break;
+            case "5":
+                Console.WriteLine("Goodbye");
+                break;
+            default:
+                Console.WriteLine("Please choose a valid option");
+                break;
+        }
+    }
 }
 
 void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
@@ -71,6 +107,7 @@ void UpdateProduct(List<Product> products, List<ProductType> productTypes)
 {
     throw new NotImplementedException();
 }
+
 
 // don't move or change this!
 public partial class Program { }
