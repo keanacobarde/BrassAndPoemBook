@@ -1,5 +1,32 @@
 ﻿
 //create a "products" variable here to include at least five Product instances. Give them appropriate ProductTypeIds
+List<Product> products = new List<Product>()
+{
+    new Product()
+    {
+        Name = "Trumpet",
+        Price = 230.50M,
+        ProductTypeId = 1,
+    },
+    new Product()
+    {
+        Name = "Tuba",
+        Price = 2300.50M,
+        ProductTypeId = 1,
+    },
+    new Product()
+    {
+        Name = "The Road Less Traveled",
+        Price = 23.50M,
+        ProductTypeId = 2,
+    },
+    new Product()
+    {
+        Name = "The Raven",
+        Price = 45.50M,
+        ProductTypeId = 2,
+    },
+};
 
 //create a "productTypes" variable here with a List of ProductTypes, and add "Brass" and "Poem" types to the List. 
 List<ProductType> productTypes = new List<ProductType>()
