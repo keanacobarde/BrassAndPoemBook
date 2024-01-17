@@ -70,7 +70,7 @@ void DisplayMenu()
                 DisplayAllProducts(products, productTypes);
                 break;
             case "2":
-                Console.WriteLine("Goodbye");
+                DeleteProduct(products, productTypes);
                 break;
             case "3":
                 Console.WriteLine("Goodbye");
@@ -106,6 +106,7 @@ void DeleteProduct(List<Product> products, List<ProductType> productTypes)
         {
             // loop through products but create a ReadLine
             Console.WriteLine("0. Goodbye");
+            DisplayAllProducts(products, productTypes);
             choice = Console.ReadLine();
             products.RemoveAt(Int32.Parse(choice) - 1);
         }
