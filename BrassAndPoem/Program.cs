@@ -168,15 +168,19 @@ void UpdateProduct(List<Product> products, List<ProductType> productTypes)
                 object value = desc.GetValue(IndxChoice);
                 Console.WriteLine(name + ": " + value);
             }
-            string propToEdit = Console.ReadLine();
+            Console.WriteLine("Type to property you intend to edit.");
+            string propToEdit = Console.ReadLine().ToLower();
 
             Console.WriteLine("What value would you like to change it to?");
-
             string valueToChange = Console.ReadLine();
 
             foreach (PropertyDescriptor desc in TypeDescriptor.GetProperties(IndxChoice))
             {
-                if (desc.Name == propToEdit)
+                if (desc.Name.ToLower() == "price")
+                {
+                    desc.SetValue(IndxChoice, Convert.ToDecimal(valueToChange));
+                }
+                else if (desc.Name.ToLower() == "propToEdit")
                 {
                     desc.SetValue(IndxChoice, valueToChange);
                 }
