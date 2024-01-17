@@ -1,7 +1,20 @@
 ﻿
-//create a "products" variable here to include at least five Product instances. Give them appropriate ProductTypeIds.
+//create a "products" variable here to include at least five Product instances. Give them appropriate ProductTypeIds
 
 //create a "productTypes" variable here with a List of ProductTypes, and add "Brass" and "Poem" types to the List. 
+List<ProductType> productTypes = new List<ProductType>()
+{
+    new ProductType()
+    { 
+        Title = "Brass",
+        ID = 1,
+    },
+        new ProductType()
+    {
+        Title = "Poem",
+        ID = 2,
+    }
+};
 
 //put your greeting here
 
