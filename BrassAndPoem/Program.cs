@@ -180,7 +180,7 @@ void UpdateProduct(List<Product> products, List<ProductType> productTypes)
                 {
                     desc.SetValue(IndxChoice, Convert.ToDecimal(valueToChange));
                 }
-                else if (desc.Name.ToLower() == "propToEdit")
+                else
                 {
                     desc.SetValue(IndxChoice, valueToChange);
                 }
