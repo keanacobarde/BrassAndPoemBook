@@ -1,5 +1,7 @@
 ﻿
 //create a "products" variable here to include at least five Product instances. Give them appropriate ProductTypeIds
+using System.ComponentModel;
+
 List<Product> products = new List<Product>()
 {
     new Product()
@@ -73,10 +75,10 @@ void DisplayMenu()
                 DeleteProduct(products, productTypes);
                 break;
             case "3":
-                Console.WriteLine("Goodbye");
+                AddProduct(products, productTypes);
                 break;
             case "4":
-                Console.WriteLine("Goodbye");
+                UpdateProduct(products, productTypes);
                 break;
             case "5":
                 Console.WriteLine("Goodbye");
@@ -120,12 +122,76 @@ void DeleteProduct(List<Product> products, List<ProductType> productTypes)
 
 void AddProduct(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    // OBTAINING USER INPUT
+    Console.WriteLine("Please supply the product name");
+    string prodName = Console.ReadLine();
+    Console.WriteLine("Please supply the asking price of the product");
+    decimal prodAskingPrice = Decimal.Parse(Console.ReadLine());
+    Console.WriteLine("Please supply the product type ID. 1 for Brass. 2 for Poem.");
+    int prodType = Int32.Parse(Console.ReadLine());
+
+    // Taking user input and appending it to new instance of proj
+    try
+    {
+        Product ProdToAdd = new Product();
+        ProdToAdd.Name = prodName;
+        ProdToAdd.Price = prodAskingPrice;
+        ProdToAdd.ProductTypeId = prodType;
+        // Adding user created prod
+        products.Add(ProdToAdd);
+    }
+    catch
+    {
+        Console.WriteLine("Enter a valid data type!");
+    }
 }
 
 void UpdateProduct(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    string choice = null;
+
+    while (choice != "0")
+    {
+        try
+        {
+            // loop through products but create a ReadLine
+            Console.WriteLine("0. Goodbye");
+            DisplayAllProducts(products, productTypes);
+            Console.WriteLine("Choose the item you wish to edit.");
+            choice = Console.ReadLine();
+            object IndxChoice = products[Int32.Parse(choice) - 1];
+
+            // view the properties of the object that you're looking to edit
+            foreach (PropertyDescriptor desc in TypeDescriptor.GetProperties(IndxChoice))
+            {
+                string name = desc.Name;
+                object value = desc.GetValue(IndxChoice);
+                Console.WriteLine(name + ": " + value);
+            }
+            Console.WriteLine("Type to property you intend to edit.");
+            string propToEdit = Console.ReadLine().ToLower();
+
+            Console.WriteLine("What value would you like to change it to?");
+            string valueToChange = Console.ReadLine();
+
+            foreach (PropertyDescriptor desc in TypeDescriptor.GetProperties(IndxChoice))
+            {
+                if (desc.Name.ToLower() == "price")
+                {
+                    desc.SetValue(IndxChoice, Convert.ToDecimal(valueToChange));
+                }
+                else
+                {
+                    desc.SetValue(IndxChoice, valueToChange);
+                }
+            }
+
+        }
+        catch
+        {
+            break;
+        }
+    }
 }
 
 Greeting();
