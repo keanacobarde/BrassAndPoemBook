@@ -1,5 +1,7 @@
 ﻿
 //create a "products" variable here to include at least five Product instances. Give them appropriate ProductTypeIds
+using System.ComponentModel;
+
 List<Product> products = new List<Product>()
 {
     new Product()
@@ -76,7 +78,7 @@ void DisplayMenu()
                 AddProduct(products, productTypes);
                 break;
             case "4":
-                Console.WriteLine("Goodbye");
+                UpdateProduct(products, productTypes);
                 break;
             case "5":
                 Console.WriteLine("Goodbye");
@@ -140,13 +142,52 @@ void AddProduct(List<Product> products, List<ProductType> productTypes)
     }
     catch
     {
-        Console.WriteLine("Please pick a valid date!");
+        Console.WriteLine("Enter a valid data type!");
     }
 }
 
 void UpdateProduct(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    string choice = null;
+
+    while (choice != "0")
+    {
+        try
+        {
+            // loop through products but create a ReadLine
+            Console.WriteLine("0. Goodbye");
+            DisplayAllProducts(products, productTypes);
+            Console.WriteLine("Choose the item you wish to edit.");
+            choice = Console.ReadLine();
+            object IndxChoice = products[Int32.Parse(choice) - 1];
+
+            // view the properties of the object that you're looking to edit
+            foreach (PropertyDescriptor desc in TypeDescriptor.GetProperties(IndxChoice))
+            {
+                string name = desc.Name;
+                object value = desc.GetValue(IndxChoice);
+                Console.WriteLine(name + ": " + value);
+            }
+            string propToEdit = Console.ReadLine();
+
+            Console.WriteLine("What value would you like to change it to?");
+
+            string valueToChange = Console.ReadLine();
+
+            foreach (PropertyDescriptor desc in TypeDescriptor.GetProperties(IndxChoice))
+            {
+                if (desc.Name == propToEdit)
+                {
+                    desc.SetValue(IndxChoice, valueToChange);
+                }
+            }
+
+        }
+        catch
+        {
+            break;
+        }
+    }
 }
 
 Greeting();
