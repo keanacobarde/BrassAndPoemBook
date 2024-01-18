@@ -160,7 +160,7 @@ void UpdateProduct(List<Product> products, List<ProductType> productTypes)
             DisplayAllProducts(products, productTypes);
             Console.WriteLine("Choose the item you wish to edit.");
             choice = Console.ReadLine();
-            object IndxChoice = products[Int32.Parse(choice) - 1];
+            Product IndxChoice = products[Int32.Parse(choice) - 1];
 
             // view the properties of the object that you're looking to edit
             foreach (PropertyDescriptor desc in TypeDescriptor.GetProperties(IndxChoice))
@@ -170,12 +170,42 @@ void UpdateProduct(List<Product> products, List<ProductType> productTypes)
                 Console.WriteLine(name + ": " + value);
             }
 
+            string prodName = IndxChoice.Name;
+            decimal prodAskingPrice = IndxChoice.Price;
+            int prodType = IndxChoice.ProductTypeId;
+
             Console.WriteLine("Please supply the product name");
-            string prodName = Console.ReadLine();
+            string prodNameEntry = Console.ReadLine();
+            if (prodNameEntry == "")
+            {
+                Console.WriteLine("Saving original name.");
+            }
+            else
+            {
+                prodName = prodNameEntry;
+            }
             Console.WriteLine("Please supply the asking price of the product");
-            decimal prodAskingPrice = Decimal.Parse(Console.ReadLine());
+            string prodAskingPriceEntry = Console.ReadLine();
+            if (decimal.TryParse(prodAskingPriceEntry, out decimal userSetPrice))
+            {
+                prodAskingPrice = userSetPrice;
+
+            }
+            else
+            {
+                Console.WriteLine("Saving original price.");
+            }
             Console.WriteLine("Please supply the product type ID. 1 for Brass. 2 for Poem.");
-            int prodType = Int32.Parse(Console.ReadLine());
+            string prodTypeEntry = Console.ReadLine();
+            if (Int32.TryParse(prodTypeEntry, out int userSetId))
+            {
+                prodType = userSetId;
+
+            }
+            else
+            {
+                Console.WriteLine("Saving product type.");
+            }
             // Delete old obj 
             products.RemoveAt(Int32.Parse(choice) - 1);
             Product ProdToAdd = new Product();
@@ -187,7 +217,7 @@ void UpdateProduct(List<Product> products, List<ProductType> productTypes)
         }
         catch
         {
-            Console.WriteLine("Invalid entry.");
+            Console.WriteLine("Invalid Entry");
             break;
         }
     }
